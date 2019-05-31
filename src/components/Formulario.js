@@ -34,6 +34,7 @@ class Formulario extends Component {
                     <label>Acción</label>
                     <select onChange={this.handleChange} name="accion">
                         <option value="">Seleccione</option>
+                        <option value="obtener">Obtener</option>
                         <option value="crear">Crear</option>
                         <option value="editar">Editar</option>
                         <option value="borrar">Borrar</option>
@@ -74,11 +75,34 @@ class Formulario extends Component {
             case 'borrar': 
                 this.deleteCity(data.codigozip, data.modo, data.motorDb);
                 break;
+            case 'obtener': 
+                this.getCities(data.modo, data.motorDb)
+                break;
             default:
+                this.getCities(data.modo, data.motorDb)
                 break;
         }
+    }
 
+    getCities(mode, dbEngine) {
+        const url = `${API_URL}:${mode}/${dbEngine}/city`;
 
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': TOKEN,
+            'accept-version': API_VERSION
+        };
+
+        axios.get(url, {headers})
+        .then(response => {
+            console.log(response);
+            this.setState({loading:false, response: JSON.stringify(response, null, 4)});
+
+        })
+        .catch(error => {
+            console.log(error);
+            this.setState({loading:false, response: JSON.stringify(error, null, 4)});
+        })
     }
     
     createCity(name, zipCode, mode, dbEngine) {
