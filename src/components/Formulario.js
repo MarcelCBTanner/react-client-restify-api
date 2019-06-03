@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { API_PROD_PORT, API_DEBUG_PORT, API_VERSION, TOKEN, API_URL } from '../config/config';
 
 class Formulario extends Component {
     constructor(props) {
@@ -21,8 +20,9 @@ class Formulario extends Component {
     };
     
     render() {
-        const apiDebugPort = API_DEBUG_PORT;
-        const apiProdPort = API_PROD_PORT;
+        const apiDebugPort = process.env.REACT_APP_API_DEBUG_PORT;
+        const apiProdPort = process.env.REACT_APP_API_PROD_PORT;
+        console.log(apiDebugPort, apiProdPort);
         return (
             <div>
                 <div className="form-wrap">
@@ -85,12 +85,12 @@ class Formulario extends Component {
     }
 
     getCities(mode, dbEngine) {
-        const url = `${API_URL}:${mode}/${dbEngine}/city`;
+        const url = `${process.env.REACT_APP_API_URL}:${mode}/${dbEngine}/city`;
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': TOKEN,
-            'accept-version': API_VERSION
+            'Authorization': process.env.REACT_APP_TOKEN,
+            'accept-version': process.env.REACT_APP_API_VERSION
         };
 
         axios.get(url, {headers})
@@ -106,12 +106,12 @@ class Formulario extends Component {
     }
     
     createCity(name, zipCode, mode, dbEngine) {
-        const url = `${API_URL}:${mode}/${dbEngine}/city`;
+        const url = `${process.env.REACT_APP_API_URL}:${mode}/${dbEngine}/city`;
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': TOKEN,
-            'accept-version': API_VERSION
+            'Authorization': process.env.REACT_APP_TOKEN,
+            'accept-version': process.env.REACT_APP_API_VERSION
         };
 
         axios.post(url, {"CityName": name, "ZipCode": zipCode}, {headers})
@@ -127,12 +127,12 @@ class Formulario extends Component {
     }
 
     editCity(name, zipCode, mode, dbEngine) {
-        const url = `${API_URL}:${mode}/${dbEngine}/city/${zipCode}`;
+        const url = `${process.env.REACT_APP_API_URL}:${mode}/${dbEngine}/city/${zipCode}`;
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': TOKEN,
-            'accept-version': API_VERSION
+            'Authorization': process.env.REACT_APP_TOKEN,
+            'accept-version': process.env.REACT_APP_API_VERSION
         };
 
         axios.put(url, {"CityName": name}, {headers})
@@ -148,12 +148,12 @@ class Formulario extends Component {
     }
 
     deleteCity(zipCode, mode, dbEngine) {
-        const url = `${API_URL}:${mode}/${dbEngine}/city/${zipCode}`;
+        const url = `${process.env.REACT_APP_API_URL}:${mode}/${dbEngine}/city/${zipCode}`;
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': TOKEN,
-            'accept-version': API_VERSION
+            'Authorization': process.env.REACT_APP_TOKEN,
+            'accept-version': process.env.REACT_APP_API_VERSION
         };
 
         axios.delete(url, {headers})

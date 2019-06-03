@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Formulario from './components/Formulario';
 import logo from './logo_tanner.svg';
+require('dotenv').config()
 
 function App() {
   return (

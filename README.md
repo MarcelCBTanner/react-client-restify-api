@@ -16,7 +16,9 @@ Luego de clonar el proyecto ejecutar en la consola
 
 ## Configuración
 
-En el archivo config.js de la carpeta src/config esta disponible la configuracion de las siguientes variables
+En el archivo .env esta disponible la configuracion de las variables descritas en la tabla
+
+Se recuerda que la existencia de este archivo .env es a fines puramente didácticos y en ningún caso de aplicación real debe versionarse dicho archivo, configurándose los secretos mediante métodos seguros.
 
 |Variable|Descripción|
 |---|---|
